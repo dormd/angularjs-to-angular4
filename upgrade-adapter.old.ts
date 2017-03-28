@@ -7,6 +7,7 @@ export const upgradeAdapter = new UpgradeAdapter(forwardRef(() => AppModule));
 @NgModule({
   imports: [
     BrowserModule
-  ]
+  ],
+  bootstrap: []
 })
 export class AppModule {}
