@@ -1,4 +1,4 @@
-import { HybridHelper } from '../hybrid-helper.v4';
+import { HybridHelper } from '../hybrid-helper';
 import { DocumentsService } from './documents-service.v4';
 
 const moduleName = 'document';
