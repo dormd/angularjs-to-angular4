@@ -1,4 +1,4 @@
-import { HybridHelper } from '../hybrid-helper';
+import { HybridHelper } from '../../hybrid-helper';
 import { DocumentComponent } from './document-component.v4';
 
 const moduleName = 'document';
