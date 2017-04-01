@@ -1,4 +1,4 @@
-import { HybridHelper } from '../hybrid-helper';
+import { HybridHelper } from '../../hybrid-helper';
 
 const myServices = [
   HybridHelper.buildProviderForUpgrade('DocumentConverter')
