@@ -24,13 +24,13 @@ export const HybridHelper: IHybridHelper {
       component, inputs, outputs 
     }) as angular.IDirectiveFactory);
 
-    return TmlaUpgradeHelper;
+    return HybridHelper;
   },
 
   downgradeProvider: (moduleName: string, providerName: string, providerClass: any): IHybridHelper => {
     angular.module(moduleName).factory(providerName, downgradeInjectable(providerClass));
 
-    return TmlaUpgradeHelper;
+    return HybridHelper;
   },
 
   buildProviderForUpgrade: (ng1Name: string, ng2Name?: string): FactoryProvider => {
