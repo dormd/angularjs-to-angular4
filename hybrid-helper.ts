@@ -1,27 +1,28 @@
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { FactoryProvider } from '@angular/core';
+import * as angular from 'angular';
 
 export interface IComponentUpgradeOptions {
-  inputs?: string[],
-  outputs?: string[]
+  inputs?: string[];
+  outputs?: string[];
 }
 
 export interface IHybridHelper {
-  downgradeComponent(moduleName: string, componentSelector: string, componentClass: any, options?: IComponentUpgradeOptions): IHybridHelper,
-  downgradeProvider(moduleName: string, providerName: string, providerClass: any): IHybridHelper,
-  buildProviderForUpgrade(ng1Name: string, ng2Name?: string): FactoryProvider
+  downgradeComponent(moduleName: string, componentSelector: string, componentClass: any, options?: IComponentUpgradeOptions): IHybridHelper;
+  downgradeProvider(moduleName: string, providerName: string, providerClass: any): IHybridHelper;
+  buildProviderForUpgrade(ng1Name: string, ng2Name?: string): FactoryProvider;
 }
 
-export const HybridHelper: IHybridHelper {
+export const HybridHelper: IHybridHelper = {
 
-  downgradeComponent: (moduleName: string, componentName: string, componentClass: any, options?: IComponentUpgradeOptions): IHybridHelper => {
+  downgradeComponent: (moduleName: string, componentSelector: string, componentClass: any, options?: IComponentUpgradeOptions): IHybridHelper => {
     options = options || {};
     const inputs = options.inputs || [];
     const outputs = options.outputs || [];
     const component = componentClass;
 
-    angular.module(moduleName).directive(componentName, downgradeComponent({ 
-      component, inputs, outputs 
+    angular.module(moduleName).directive(componentSelector, downgradeComponent({
+      component, inputs, outputs
     }) as angular.IDirectiveFactory);
 
     return HybridHelper;
@@ -35,15 +36,15 @@ export const HybridHelper: IHybridHelper {
 
   buildProviderForUpgrade: (ng1Name: string, ng2Name?: string): FactoryProvider => {
     ng2Name = ng2Name || ng1Name;
- 
+
     return {
       provide: ng2Name,
       useFactory: buildFactoryForUpgradeProvider(ng1Name),
       deps: ['$injector']
     };
   }
-}
+};
 
 function buildFactoryForUpgradeProvider(ng1Name: string): Function {
-    return (injector: any) => injector.get(ng1Name);
+  return (injector: any) => injector.get(ng1Name);
 }
