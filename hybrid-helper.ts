@@ -12,7 +12,7 @@ export interface IHybridHelper {
   buildProviderForUpgrade(ng1Name: string, ng2Name?: string): FactoryProvider
 }
 
-export const HybridHelper: IHybridHelper {
+export const HybridHelper: IHybridHelper = {
 
   downgradeComponent: (moduleName: string, componentName: string, componentClass: any, options?: IComponentUpgradeOptions): IHybridHelper => {
     options = options || {};
